@@ -1,10 +1,13 @@
 
 import './App.css';
+import Navbar from './components/Navbar';
+import NewsComponent from './components/NewsComponent';
 
 function App() {
   return (
    <>
-   <h1>Hello , hey there </h1>
+   <Navbar />
+   <NewsComponent />
    </>
   );
 }
