@@ -6,7 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ToDo List</title>
 </head>
-<body>
-    <h1>It's a <%= kindOfDay %></h1>
+
+    <!-- showing weekends and weekdays in different color -->
+    <% if(kindOfDay==="Saturday" || kindOfDay ==="Sunday") {
+    %>
+    <h1 style="color : violet">It's a <%= kindOfDay %></h1>
+    <%  }else { %>
+        
+        <h1 style="color : green">It's a <%= kindOfDay %></h1>
+        <% } %>
 </body>
 </html>
