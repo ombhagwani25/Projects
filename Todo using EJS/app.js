@@ -11,15 +11,12 @@ app.get("/", (req, res) => {
     
     const today = new Date();
     var currDay = today.getDay();
-    var dayString = "";
-    if (currDay == 6 || currDay == 0) {
-        dayString = "weekend"
-    } else {
-        dayString = "weekday"
-    }
+    // var dayString = "";
+    const daysOfWeek =  ["Sunday" , "Monday" , "Tuesday" , "Wednesday" , "Thrusday" , "Friday" ,"Saturday" ];
+
     //   res.sendFile(__dirname + "/index.html")
     // using res.render() , that supports ejs
-    res.render('list' , {'kindOfDay' : dayString})
+    res.render('list' , {'kindOfDay' : daysOfWeek[currDay]})
 
 })
 
