@@ -10,13 +10,21 @@ app.set('view engine' ,'ejs');
 app.get("/", (req, res) => {
     
     const today = new Date();
-    var currDay = today.getDay();
-    // var dayString = "";
-    const daysOfWeek =  ["Sunday" , "Monday" , "Tuesday" , "Wednesday" , "Thrusday" , "Friday" ,"Saturday" ];
 
-    //   res.sendFile(__dirname + "/index.html")
-    // using res.render() , that supports ejs
-    res.render('list' , {'kindOfDay' : daysOfWeek[currDay]})
+    // another cool method of getting days using JS
+    var options =  {
+        weekday : "long",
+        day : "numeric",
+        month : "long"
+    };
+
+    var day = today.toLocaleDateString("en-US",options);
+    console.log(day);
+
+  
+    res.render('list' , {'kindOfDay' : day,
+
+})
 
 })
 
