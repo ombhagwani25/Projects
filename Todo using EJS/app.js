@@ -8,7 +8,7 @@ app.set('view engine' ,'ejs');
 
 app.use(bodyParser.urlencoded({extended : true}))
 
-var itemName = "";
+var items = [];
 
 app.get("/", (req, res) => {
     
@@ -22,16 +22,14 @@ app.get("/", (req, res) => {
     };
     
     var day = today.toLocaleDateString("en-US",options);  
-    res.render('list' , {kindOfDay : day  , newListItem : itemName})
+    res.render('list' , {kindOfDay : day  , newListItem : items})
 
 })
 
 app.post("/" , (req,res)=> {
-     itemName = req.body.itemName;
-    // res.render("list", {newListItem : itemName})
+     var item = req.body.itemName;
+     items.push(item);
     res.redirect("/");
-
-
 })
 
 
