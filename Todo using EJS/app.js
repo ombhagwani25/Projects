@@ -8,7 +8,7 @@ app.set('view engine' ,'ejs');
 
 app.use(bodyParser.urlencoded({extended : true}))
 
-var items = [];
+var items = ["Buy Food" , "Cook Food", "Eat Food"];
 
 app.get("/", (req, res) => {
     
@@ -24,6 +24,9 @@ app.get("/", (req, res) => {
     var day = today.toLocaleDateString("en-US",options);  
     res.render('list' , {kindOfDay : day  , newListItem : items})
 console.log("error commit !! no changes");
+
+    // fck
+    console.log("Fake log");
 
 })
 
