@@ -8,7 +8,7 @@ app.set('view engine' ,'ejs');
 
 app.use(bodyParser.urlencoded({extended : true}))
 
-var items = [];
+var items = ["Buy Food" , "Cook Food", "Eat Food"];
 
 app.get("/", (req, res) => {
     
