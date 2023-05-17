@@ -23,7 +23,9 @@ app.get("/", (req, res) => {
     
     var day = today.toLocaleDateString("en-US",options);  
     res.render('list' , {kindOfDay : day  , newListItem : items})
-    console.log("this is a temporary log just to commit");
+
+    // fck
+    console.log("Fake log");
 
 })
 
