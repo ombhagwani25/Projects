@@ -25,9 +25,6 @@ app.get("/", (req, res) => {
     res.render('list' , {kindOfDay : day  , newListItem : items})
 console.log("error commit !! no changes");
 
-    // fck
-    console.log("Fake log");
-
 })
 
 app.post("/" , (req,res)=> {
