@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,20 +9,27 @@
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 
-        <h1 class="box" id="heading">It's  <%= kindOfDay %></h1>
-       <!-- now working on the actual project -->
-       
-       <ul>      
-        <% for(let i=0; i<newListItem.length; i++) { %>
+<h1 class="box" id="heading">It's <%= kindOfDay %>
+</h1>
+
+<div class="box">
+
+    <% for(let i=0; i<newListItem.length; i++) { %>
+        <div class="item">
             
-            <li> <%= newListItem[i] %> </li>
+            <input type="checkbox">
+            <p>
+                <%= newListItem[i] %>
+            </p>
+        </div>
         <% } %>
         
-       </ul>
+        
+        <form class="item" action="/" method="post">
+            <input type="text" name="itemName" required placeholder="New Item" autocomplete="off"> <br>
+            <button type="submit" name="submit">+</button>
+        </form>
+    </div>
+        </body>
 
-       <form action="/" method="post">
-        <input type="text" name="itemName" required> <br>
-        <input type="submit" name="submit">
-       </form>
-</body>
 </html>
