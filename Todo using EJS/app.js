@@ -10,7 +10,8 @@ app.use(bodyParser.urlencoded({extended : true}))
 
 app.use(express.static("public"));
 
-var items = ["Buy Food" , "Cook Food", "Eat Food"];
+let items = ["Buy Food" , "Cook Food", "Eat Food"];
+let workItems = []; 
 
 app.get("/", (req, res) => {
     
@@ -24,7 +25,7 @@ app.get("/", (req, res) => {
     };
     
     var day = today.toLocaleDateString("en-US",options);  
-    res.render('list' , {kindOfDay : day  , newListItem : items})
+    res.render('list' , {listTitle : day  , newListItem : items})
 console.log("error commit !! no changes");
 
 })
@@ -33,6 +34,17 @@ app.post("/" , (req,res)=> {
      var item = req.body.itemName;
      items.push(item);
     res.redirect("/");
+})
+
+// targeting the work element
+app.get("/work" , (req,res)=> {
+    res.render("list" , {listTitle : "Work" , newListItem : workItems})
+})
+
+app.post("/work" , (req,res)=> {
+    let currItem = req.body.newItem;
+    workItems.push(currItem);
+    res.redirect("/work");
 })
 
 
