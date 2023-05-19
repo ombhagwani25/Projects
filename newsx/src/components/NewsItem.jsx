@@ -2,11 +2,15 @@ import React from 'react'
 
 
 export default function NewsItem(props) {
-  
 
    
     return (
         <>
+        {/* codepen card start */}
+
+  
+        {/* codepent card end  */}
+
        
             <div className="card" style={{ width: "18rem" }} >
                 <img src={props.imageUrl} className="card-img-top" alt="..." />
