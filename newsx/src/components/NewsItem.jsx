@@ -13,10 +13,13 @@ export default function NewsItem(props) {
 
        
             <div className="card" style={{ width: "18rem" }} >
-                <img src={props.imageUrl} className="card-img-top" alt="..." />
+                <img src={props.imageUrl} className="card-img-top" alt="..." loading='lazy' />
                 <div className="card-body">
-                    <h5 className="card-title">{props.title}</h5>
-                    <p className="card-text">{props.description}</p>
+                    
+                    <h5 className="card-title" >{props.title==null ?  " " :   ((props.title.length > 30 )? props.title.substring(0,30) + "..." : props.title)} </h5>
+
+
+                    <p className="card-text"> {props.description == null ?  " " : (props.description.length > 30 ? props.description.substring(0,30) + "..." : props.title)  }  </p>
                     <a href="/" className="btn btn-sm btn-primary">Read More</a>
                 </div>
 

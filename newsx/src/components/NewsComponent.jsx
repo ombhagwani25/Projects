@@ -1,12 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import NewsItem from './NewsItem'
 
+import DemoData from "./DemoData.json";
 
 
 export default function NewsComponent() {
+
+    const articles = DemoData.articles;
+
     // fetching data from API
 
-    const url = 'https://newsapi.org/v2/everything?q=bitcoin&apiKey=398674dffbd849df94e0e54785d51b7f';
+    // const url = 'https://newsapi.org/v2/everything?q=bitcoin&apiKey=398674dffbd849df94e0e54785d51b7f';
+    // const url = 'https://newsapi.org/v2/top-headlines?country=us?pageSize=10&apiKey=398674dffbd849df94e0e54785d51b7f';
+    const url = "https://newsapi.org/v2/top-headlines?country=us&apiKey=398674dffbd849df94e0e54785d51b7f";
 
     // const fetchFunc = async () => {
     //     let data = await fetch(url)
@@ -14,16 +20,16 @@ export default function NewsComponent() {
     //     setData(json);
     //     return json;
     // }
-    const fetchFunc = () => {
-        return fetch(url)
-            .then((res) => res.json())
-            .then((d) => setData(d.articles))
-    }
-    const [data, setData] = useState([]);
+    // const fetchFunc = () => {
+    //     return fetch(url)
+    //         .then((res) => res.json())
+    //         .then((d) => setData(d.articles))
+    // }
+    // const [data, setData] = useState([]);
 
-    useEffect(() => {
-        fetchFunc();
-    }, [])
+    // useEffect(() => {
+    //     fetchFunc();
+    // }, [])
 
 
 
@@ -38,7 +44,19 @@ export default function NewsComponent() {
 
                     {/* following code to fetch data from news api */}
 
-                    {data.map((item, index) => {
+                    {/* {data.map((item, index) => {
+                        { count = count + 1 }
+                        return (
+
+                            <div className="col col-md4" key={index}>
+                                <NewsItem title={item.title} description={item.description} imageUrl={item.urlToImage} />
+                            </div>
+                        );
+                    })} */}
+
+                    {/* <NewsItem title={data.title} description={data.description} imageUrl={data.urlToImage} /> */}
+
+                    {articles.map((item, index) => {
                         { count = count + 1 }
                         return (
 
@@ -47,104 +65,17 @@ export default function NewsComponent() {
                             </div>
                         );
                     })}
+                    {/* <NewsItem title={articls.title} description={articles.description} imageUrl={articles.urlToImage} />  */}
 
-                    <NewsItem title={data.articles[0].title} description={data.articles[0].description} imageUrl={data.articles[0].urlToImage} />
+
                 </div>
             </div>
 
             {console.log(count)}
-            {/* <div className="container">
-
-                <h4 className="display-4">NewX - Top Headlines</h4>
-
-                {/* slider */}
-            {/* <div id="carouselExample" class="carousel slide" data-ride="carousel" data-interval="1000" data-bs-pause="false" >
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <div className="row">
-                            <div className="col col-md4">
-                                <NewsItem title="hii" description="sample description" imageUrl={imageUrl} />
-                            </div>
-                            <div className="col col-md4">
-                                <NewsItem title="cricket news" description="sample description" imageUrl={imageUrl} />
-                            </div>
-                            <div className="col col-md4">
-                                <NewsItem title="cricket news" description="sample description" imageUrl={imageUrl} />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div className="row">
-                            <div className="col col-md4">
-                                <NewsItem title="hii" description="sample description" imageUrl={imageUrl} />
-                            </div>
-                            <div className="col col-md4">
-                                <NewsItem title="cricket news" description="sample description" imageUrl={imageUrl} />
-                            </div>
-                            <div className="col col-md4">
-                                <NewsItem title="cricket news" description="sample description" imageUrl={imageUrl} />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div className="row">
-                            <div className="col col-md4">
-                                <NewsItem title="hii" description="sample description" imageUrl={imageUrl} />
-                            </div>
-                            <div className="col col-md4">
-                                <NewsItem title="cricket news" description="sample description" imageUrl={imageUrl} />
-                            </div>
-                            <div className="col col-md4">
-                                <NewsItem title="cricket news" description="sample description" imageUrl={imageUrl} />
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            
 
 
-
-
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div> */}
-
-            {/* slider > end */}
-
-
-            {/* TODO  : display data from API */}
-            {/* 
-                <div className="row">
-                    <div className="col col-md4">
-                        <NewsItem title="hii" description="sample description" imageUrl={imageUrl} />
-                    </div>
-                    <div className="col col-md4">
-                        <NewsItem title="cricket news" description="sample description" imageUrl={imageUrl} />
-                    </div>
-                    <div className="col col-md4">
-                        <NewsItem title="cricket news" description="sample description" imageUrl={imageUrl} />
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col col-md4">
-                        <NewsItem title="cricket news" description="sample description" imageUrl={imageUrl} />
-                    </div>
-                    <div className="col col-md4">
-                        <NewsItem title="cricket news" description="sample description" imageUrl={imageUrl} />
-                    </div>
-                    <div className="col col-md4">
-                        <NewsItem title="cricket news" description="sample description" imageUrl={imageUrl} />
-                    </div>
-                </div> */}
-
-
-            {/* </div> */}
-
+            
 
         </>
     )
