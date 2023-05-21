@@ -37,9 +37,10 @@ export default function NewsComponent() {
     var count = 0;
     return (
         <>
-            <h2>Inside newscomponent</h2> <br /> <br />
+           
 
             <div className="container">
+            <h2>NewsX - Top Headlines</h2>  <br />
                 <div className="row">
 
                     {/* following code to fetch data from news api */}
