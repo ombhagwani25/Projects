@@ -35,6 +35,14 @@ app.get("/compose" , (req,res) => {
   res.render(__dirname + "/views/compose.ejs" , {});
 })
 
+// getting compose data
+app.post("/" , (req,res)=> {
+  let data = req.body.composeData;
+  console.log(data);
+  res.redirect("/");
+  
+})
+
 app.listen(3000, function() {
   console.log("Server started on port 3000");
 });
