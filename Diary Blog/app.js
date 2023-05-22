@@ -37,8 +37,10 @@ app.get("/compose" , (req,res) => {
 
 // getting compose data
 app.post("/" , (req,res)=> {
-  let data = req.body.composeData;
-  console.log(data);
+  const composeTitle = req.body.composeTitle;
+  const composeData = req.body.composeData;
+  console.log("title : " + composeTitle);
+  console.log("data : "  + composeData); 
   res.redirect("/");
   
 })

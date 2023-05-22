@@ -1,9 +1,15 @@
 <%- include("partials/header.ejs") %>
 
-<h1>Hello </h1>
+<h1>Compose </h1>
 <form action="/"  method="post">
-    <input type="text" name="composeData" autocomplete="off" >
-     <button type="submit">Publish</button>
+
+    <label for="titlebox">Title</label> <br>
+
+    <input id="titlebox" type="text" name="composeTitle" autocomplete="off" size="130" > <br>
+
+<label for="postbox">Post</label> <br>
+    <textarea name="composeData" cols="130" rows="8"></textarea> <br>
+     <button class="btn btn-info" type="submit">Publish</button>
 </form>
 
 <%- include("partials/footer.ejs") %>
