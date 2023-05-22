@@ -2,9 +2,22 @@
 
     <h1>Home</h1>
 
-    <p>
-        <%= homePara %>
-    </p>
+    <div class="container">
+
+    
+        <% for (const item in homePara) { %>
+           <% if (Object.hasOwnProperty.call(homePara, item)) { %>
+               <% const currItem = homePara[item]; %>
+            <h2>
+
+                <%= currItem.title %>
+            </h2>
+
+            <p>
+                <%= currItem.data  %>
+            </p>
+                <% } %>
+       <% } %>
+    </div>
 
     <%- include("partials/footer.ejs") %>
-

@@ -10,14 +10,22 @@ const contactContent = "Scelerisque eleifend donec pretium vulputate sapien. Rho
 
 const app = express();
 
+// delcarations
+const dataArray = [{
+  title : "Sample",
+  data : "sampledata"
+}
+];
+
 app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
+
 // home page
 app.get("/" , (req,res) => {
-  res.render(__dirname + "/views/home.ejs" , {homePara : homeStartingContent})
+  res.render(__dirname + "/views/home.ejs" , {homePara : dataArray})
 })
 
 // about us page
@@ -39,11 +47,22 @@ app.get("/compose" , (req,res) => {
 app.post("/" , (req,res)=> {
   const composeTitle = req.body.composeTitle;
   const composeData = req.body.composeData;
-  console.log("title : " + composeTitle);
-  console.log("data : "  + composeData); 
-  res.redirect("/");
   
-})
+  const post =  {
+    title : composeTitle,
+    data : composeData
+  }
+  dataArray.push(post);
+
+  dataArray.forEach((item)=> {
+    console.log(item.title);
+  });
+  res.redirect("/");
+
+
+  
+});
+
 
 app.listen(3000, function() {
   console.log("Server started on port 3000");
