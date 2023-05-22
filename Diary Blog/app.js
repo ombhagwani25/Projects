@@ -15,10 +15,21 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
-
+// home page
 app.get("/" , (req,res) => {
-  res.render(__dirname + "/views/home.ejs")
+  res.render(__dirname + "/views/home.ejs" , {homePara : homeStartingContent})
 })
+
+// about us page
+app.get("/about" , (req,res) => {
+  res.render(__dirname + "/views/about.ejs" , {aboutPara : aboutContent});
+})
+
+// contact page
+app.get("/contact" , (req,res) => {
+  res.render(__dirname + "/views/contact.ejs" , {contactPara : contactContent});
+})
+
 
 app.listen(3000, function() {
   console.log("Server started on port 3000");
