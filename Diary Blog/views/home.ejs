@@ -4,20 +4,16 @@
 
     <div class="container">
 
-    
-        <% for (const item in homePara) { %>
-           <% if (Object.hasOwnProperty.call(homePara, item)) { %>
-               <% const currItem = homePara[item]; %>
-            <h2>
 
-                <%= currItem.title %>
-            </h2>
-
+        <% homePara.forEach((item)=> { %>
+            <h1>
+                <%= item.title %>
+            </h1>
             <p>
-                <%= currItem.data  %>
+                <%= item.data %>
             </p>
-                <% } %>
-       <% } %>
+            <% }); %>
+
     </div>
 
     <%- include("partials/footer.ejs") %>

@@ -11,11 +11,7 @@ const contactContent = "Scelerisque eleifend donec pretium vulputate sapien. Rho
 const app = express();
 
 // delcarations
-const dataArray = [{
-  title : "Sample",
-  data : "sampledata"
-}
-];
+const dataArray = [];
 
 app.set('view engine', 'ejs');
 
@@ -41,6 +37,12 @@ app.get("/contact" , (req,res) => {
 // compose page
 app.get("/compose" , (req,res) => {
   res.render(__dirname + "/views/compose.ejs" , {});
+})
+
+// url parameters
+app.get("/posts/:postRoute" , (req,res) => {
+  console.log(req.params.postRoute);
+  res.redirect("/");
 })
 
 // getting compose data
