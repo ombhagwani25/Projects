@@ -39,11 +39,7 @@ app.get("/compose" , (req,res) => {
   res.render(__dirname + "/views/compose.ejs" , {});
 })
 
-// url parameters
-app.get("/posts/:postRoute" , (req,res) => {
-  console.log(req.params.postRoute);
-  res.redirect("/");
-})
+
 
 // getting compose data
 app.post("/" , (req,res)=> {
@@ -61,9 +57,20 @@ app.post("/" , (req,res)=> {
   });
   res.redirect("/");
 
-
-  
 });
+
+
+// url parameters
+app.get("/posts/:postRoute" , (req,res) => {
+  let currRoute = req.params.postRoute;
+  let match = dataArray.indexOf(currRoute);
+  if(match) {
+    console.log("Match Found !");
+  } else {
+    console.log("Match not found !");
+  }
+  res.redirect("/");
+})
 
 
 app.listen(3000, function() {
