@@ -41,8 +41,21 @@ app.get("/compose" , (req,res) => {
 
 // url parameters
 app.get("/posts/:postRoute" , (req,res) => {
-  console.log(req.params.postRoute);
-  res.redirect("/");
+  let currRoute=  req.params.postRoute;
+  var count =0 ;
+  dataArray.forEach( (item)=> {
+
+    let currTitle = item.title;
+    currTitle = currTitle.trim();
+    currTitle = currTitle.replace(" ", "-");
+    if(currTitle == currRoute) {
+      let currObj = dataArray[count];
+      res.render(__dirname + "/views/post.ejs", {postObj : currObj})
+      console.log("title : " + currObj.title + " , data: " , currObj.data  );
+      
+    }
+    count++;
+  });
 })
 
 // getting compose data
@@ -55,10 +68,7 @@ app.post("/" , (req,res)=> {
     data : composeData
   }
   dataArray.push(post);
-
-  dataArray.forEach((item)=> {
-    console.log(item.title);
-  });
+  
   res.redirect("/");
 
 
