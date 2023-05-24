@@ -10,10 +10,12 @@
                 <%= item.title %>
             </h1>
             <p>
-                <%= item.data %>
+                <%= item.data.substring(0,100) + "..." %>
             </p>
             <% }); %>
 
     </div>
 
     <%- include("partials/footer.ejs") %>
+
+    
