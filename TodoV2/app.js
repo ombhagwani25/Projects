@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 const date = require(__dirname + "/date.js");
 
 const mongoose = require("mongoose")
-mongoose.connect("mongodb://localhost:27017/test")
+mongoose.connect("mongodb://localhost:27017/test", { useNewUrlParser: true })
 
 const app = express();
 
@@ -20,15 +20,17 @@ const workItems = [];
 const Item = mongoose.model("Item", { name: String })
 
 app.get("/", function (req, res) {
-
   const day = date.getDate();
-
-  
-  const obj1 = Item.findOne();
-  
-  res.render("list", { listTitle: day, newListItems: items });
-
+  Item.find({}, 'name')
+    .then((items) => {
+      res.render("list", { listTitle: day, newListItems: items });
+    })
+    .catch((error) => {
+      console.error('Error retrieving items:', error);
+      res.render("list", { listTitle: day, newListItems: [] }); // Render an empty list in case of an error
+    });
 });
+
 
 app.post("/", function (req, res) {
 
