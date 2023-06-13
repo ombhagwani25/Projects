@@ -47,18 +47,23 @@ app.get("/", async function (req, res) {
 });
 
 
-app.post("/", function (req, res) {
+// app.post("/", function (req, res) {
 
-  const item = req.body.newItem;
+//   const item = req.body.newItem;
 
-  if (req.body.list === "Work") {
-    workItems.push(item);
-    res.redirect("/work");
-  } else {
-    items.push(item);
-    res.redirect("/");
-  }
-});
+//   if (req.body.list === "Work") {
+//     workItems.push(item);
+//     res.redirect("/work");
+//   } else {
+//     items.push(item);
+//     res.redirect("/");
+//   }
+// });
+
+app.post("/" , (req ,res)=> {
+  const currItem = req.body.newItem;
+   
+})
 
 app.get("/work", function (req, res) {
   res.render("list", { listTitle: "Work List", newListItems: workItems });
