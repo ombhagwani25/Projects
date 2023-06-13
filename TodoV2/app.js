@@ -26,13 +26,11 @@ const itemSchema = new mongoose.Schema({
 
 const Item = mongoose.model("Item", itemSchema);
 
-var itemArray = ["Welcome to your TodoList!" , "Hit the + icon to add a new item" , "<-- Touch this to delete an item"];
+
 
 
 app.get("/", async function (req, res) {
-  // if(itemArray.length==0) {
-
-  // }
+  const itemArray = []
   const data = await Item.find().then((temp) => {
     temp.map(i => {
       itemArray.push(i.name);
@@ -62,7 +60,9 @@ app.get("/", async function (req, res) {
 
 app.post("/" , (req ,res)=> {
   const currItem = req.body.newItem;
-  
+  // creating a new mongo document to store this item
+  const itemDoc = new Item({name : currItem});
+  itemDoc.save();
   res.redirect("/");
 })
 
