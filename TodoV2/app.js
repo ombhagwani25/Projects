@@ -44,19 +44,12 @@ app.get("/", async function (req, res) {
   
 });
 
+// route for deletion
 
-// app.post("/", function (req, res) {
-
-//   const item = req.body.newItem;
-
-//   if (req.body.list === "Work") {
-//     workItems.push(item);
-//     res.redirect("/work");
-//   } else {
-//     items.push(item);
-//     res.redirect("/");
-//   }
-// });
+app.post("/delete" , (req,res)=> {
+  console.log(req.body);
+  res.redirect("/");
+})
 
 app.post("/" , (req ,res)=> {
   const currItem = req.body.newItem;

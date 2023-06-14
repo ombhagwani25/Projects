@@ -6,10 +6,13 @@
 
 <div class="box">
   <% for (let i = 0; i < newListItems.length; i++) { %>
-    <div class="item">
-      <input type="checkbox">
-      <p><%= newListItems[i] %></p>
-    </div>
+    <!-- separate form for deletion of the items  -->
+    <form action="/delete" method="post">
+      <div class="item">
+        <input type="checkbox">
+        <p><%= newListItems[i] %></p>
+      </div>
+    </form>
   <% } %>
 
   <form class="item" action="/" method="post">
