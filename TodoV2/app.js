@@ -14,8 +14,8 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-const items = ["Buy Food", "Cook Food", "Eat Food"];
-const workItems = [];
+
+
 
 
 const mongoose = require('mongoose');
@@ -32,11 +32,11 @@ const Item = mongoose.model("Item", itemSchema);
 app.get("/", async function (req, res) {
   const itemArray = []
   const data = await Item.find().then((temp) => {
-    temp.map(i => {
-      itemArray.push(i.name);
-      console.log(i.name);
-    })
-    res.render("list", { listTitle: "day", newListItems: itemArray });
+    // temp.map(i => {
+    //   itemArray.push(i.name);
+    //   // console.log(i.name);
+    // })
+    res.render("list", { listTitle: "day", newListItems: temp });
   })
 
 
@@ -45,11 +45,18 @@ app.get("/", async function (req, res) {
 });
 
 // route for deletion
+app.post("/delete", async (req, res) => {
+  const checkedItem = req.body.cBox;
+  try {
+    await Item.deleteOne({ _id: new mongoose.Types.ObjectId(checkedItem) });
+    console.log("Record deleted successfully.");
+  } catch (error) {
+    console.log(error);
+  }
 
-app.post("/delete" , (req,res)=> {
-  console.log(req.body);
   res.redirect("/");
-})
+});
+
 
 app.post("/" , (req ,res)=> {
   const currItem = req.body.newItem;
@@ -59,9 +66,6 @@ app.post("/" , (req ,res)=> {
   res.redirect("/");
 })
 
-app.get("/work", function (req, res) {
-  res.render("list", { listTitle: "Work List", newListItems: workItems });
-});
 
 app.get("/about", function (req, res) {
   res.render("about");

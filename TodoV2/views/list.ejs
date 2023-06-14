@@ -7,10 +7,12 @@
 <div class="box">
   <% for (let i = 0; i < newListItems.length; i++) { %>
     <!-- separate form for deletion of the items  -->
-    <form action="/delete" method="post">
+    <form action="/delete" method="post" class="delete-form">
       <div class="item">
-        <input type="checkbox">
-        <p><%= newListItems[i] %></p>
+        <input type="checkbox" name="cBox" class="delete-checkbox"
+        value= <%= newListItems[i]._id %>
+        >
+        <p><%= newListItems[i].name %></p>
       </div>
     </form>
   <% } %>
@@ -20,5 +22,15 @@
     <button type="submit" name="list">+</button>
   </form>
 </div>
+
+<script>
+ const deleteForms = document.querySelectorAll(".delete-form");
+  deleteForms.forEach(function(form) {
+    const checkbox = form.querySelector(".delete-checkbox");
+    checkbox.addEventListener("click", function() {
+      form.submit(); // Submit the form when the checkbox is clicked
+    });
+  });
+</script>
 
 <%- include("footer") -%>
