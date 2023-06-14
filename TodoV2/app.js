@@ -3,6 +3,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const date = require(__dirname + "/date.js");
+const swal = require("sweetalert2");
+
 
 // const mongoose = require("mongoose")
 // mongoose.connect("mongodb://localhost:27017/test")
@@ -15,7 +17,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 
-
+// TODO: Model.findByIdAndRemove()
 
 
 const mongoose = require('mongoose');
@@ -36,7 +38,10 @@ app.get("/", async function (req, res) {
     //   itemArray.push(i.name);
     //   // console.log(i.name);
     // })
-    res.render("list", { listTitle: "day", newListItems: temp });
+    
+    const today= new Date().toLocaleString('en-us' , {dateStyle : "full"})
+    const todayDate = today.substring(0,today.length-6);
+    res.render("list", { listTitle: todayDate, newListItems: temp });
   })
 
 
@@ -48,8 +53,8 @@ app.get("/", async function (req, res) {
 app.post("/delete", async (req, res) => {
   const checkedItem = req.body.cBox;
   try {
+    
     await Item.deleteOne({ _id: new mongoose.Types.ObjectId(checkedItem) });
-    console.log("Record deleted successfully.");
   } catch (error) {
     console.log(error);
   }
