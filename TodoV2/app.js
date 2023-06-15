@@ -53,8 +53,8 @@ app.get("/", async function (req, res) {
 app.post("/delete", async (req, res) => {
   const checkedItem = req.body.cBox;
   try {
-    
-    await Item.deleteOne({ _id: new mongoose.Types.ObjectId(checkedItem) });
+    await Item.findByIdAndRemove({ _id: new mongoose.Types.ObjectId(checkedItem) })
+
   } catch (error) {
     console.log(error);
   }
@@ -71,10 +71,14 @@ app.post("/" , (req ,res)=> {
   res.redirect("/");
 })
 
+// dynamic routing - Creating multiple lists
 
-app.get("/about", function (req, res) {
-  res.render("about");
-});
+app.get(":urlVar" , (req,res)=> {
+  const urlVar = req.params.urlVar;
+  console.log(urlVar);
+
+})
+
 
 app.listen(3000, function () {
   console.log("Server started on port 3000");
