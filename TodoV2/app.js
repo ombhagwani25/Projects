@@ -73,10 +73,19 @@ app.post("/" , (req ,res)=> {
 
 // dynamic routing - Creating multiple lists
 
-app.get(":urlVar" , (req,res)=> {
+app.get("/:urlVar" , (req,res)=> {
   const urlVar = req.params.urlVar;
-  console.log(urlVar);
+  const resItem = Item.findOne(urlVar);
+  if(resItem.length==0) {
+    // create new item
+    const newItem = new Item({name : urlVar});
+    newItem.save();
+    res.redirect("/" + urlVar);
 
+  } else {
+
+    res.render(urlVar, { listTitle: resItem., newListItems: temp });
+  }
 })
 
 
