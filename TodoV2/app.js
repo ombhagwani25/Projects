@@ -84,7 +84,7 @@ app.get("/:urlVar" , (req,res)=> {
 
   } else {
 
-    res.render(urlVar, { listTitle: resItem., newListItems: temp });
+    res.render("list", { listTitle: resItem.name, newListItems: resItem });
   }
 })
 
