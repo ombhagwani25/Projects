@@ -8,6 +8,8 @@ app.use(express.static("public"));
 
 app.set('view engine', 'ejs');
 
+app.use(bodyParser.urlencoded({extended : true}));
+
 app.set('views', path.join(__dirname, 'public', 'views'));
 
 app.get("/", (req,res)=> {
@@ -17,12 +19,24 @@ app.get("/", (req,res)=> {
 
 
 app.post("/signup" , (req,res)=> {
-    res.send("singup page backend")
+    const name = req.body.username;
+    const email = req.body.email;
+    const password= req.body.password;       
+
+    const response = {
+        username: name,
+        email: email,
+        password: password
+    };
+
+    res.send(response);
+    
+    
 })
 
 app.post("/signin" ,(req,res)=> {
     res.send("signin page backend");
 })
 
-app.listen(3000);
+app.listen(3001);
 
