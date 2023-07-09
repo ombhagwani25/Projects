@@ -8,7 +8,14 @@ app.use(express.static("public"));
 
 app.set('view engine', 'ejs');
 
-app.use(bodyParser.urlencoded({extended : true}));
+
+// Middleware to parse JSON bodies
+app.use(express.json());
+app.use(bodyParser.json());
+
+// Middleware to parse URL-encoded bodies
+app.use(express.urlencoded({ extended: true }));
+
 
 app.set('views', path.join(__dirname, 'public', 'views'));
 
@@ -18,25 +25,75 @@ app.get("/", (req,res)=> {
 })
 
 
-app.post("/signup" , (req,res)=> {
+app.post("/signup" , async (req,res)=> {
     const name = req.body.username;
     const email = req.body.email;
-    const password= req.body.password;       
+    const password= req.body.password;      
 
-    const response = {
-        username: name,
-        email: email,
-        password: password
-    };
+    const tempUser = new userModel({
+        name : name,            
+        email : email,
+        password : password
+    })
 
-    res.send(response);
+    const existing = await userModel.findOne({email : email});
+    if(existing) {
+        res.render('existing' ,{email : email});
+    } else {
+        tempUser.save().then(()=> {
+        console.log('user created successfully !');
+        res.render('newuser' , {name : name, email : email});
+    }).catch(()=> {
+        console.log('error creating user :' + err);
+    });
+    // res.render('dashboard' , {name : name , email : email, password : password});
+    }   
     
     
+
+   
 })
 
-app.post("/signin" ,(req,res)=> {
-    res.send("signin page backend");
+app.post("/signin" , async (req, res)=> {
+   const email = req.body.email;
+   const password = req.body.password;
+   console.log("ent password: " , password);
+   const userFound = await userModel.findOne({email : email});
+//    console.log(userFound);
+   if(userFound) {
+       console.log("yee logg" , userFound);
+       console.log("dusri : " , (userFound.email === email ), (userFound.password === password));
+    if(userFound.email === email && userFound.password === password) {
+        res.render('dashboard' , { name : userFound.name , email : email})
+    } else {
+        res.render('error' , {msg : "email or password is incorrect"});
+    }
+   } else {
+    res.render ('error' , {msg : "user not found"})
+   }
 })
 
 app.listen(3001);
+
+// mongo db connections
+
+mongoose.connect("mongodb://127.0.0.1:27017/signupform").then( ()=> {
+    console.log("Connection Successfull");
+}).catch((err)=> {
+    console.log("Error while connecting to mongo db : " + err);
+})
+
+const userSchema = new mongoose.Schema({
+    name : String,
+    email : String,
+    password : String
+});
+
+const userModel = mongoose.model("users", userSchema);
+
+
+
+
+
+
 

@@ -237,8 +237,6 @@ input {
 </head>
 <body>
 
- <%- include('navbar') %>
-
     <div class="container" id="container">
         <div class="form-container sign-up-container">
             <form action="/signup" method="POST">
@@ -267,8 +265,8 @@ input {
                     <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
                 </div> -->
                 <span>use your account</span>
-                <input name="" type="email" placeholder="Email" />
-                <input type="password" placeholder="Password" />
+                <input name="email" type="email" placeholder="Email" />
+                <input name="password" type="password" placeholder="Password" />
                 <a href="#">Forgot your password?</a>
                 <button>Sign In</button>
             </form>
