@@ -46,7 +46,7 @@ app.post("/signup" , async (req,res)=> {
     }).catch(()=> {
         console.log('error creating user :' + err);
     });
-    // res.render('dashboard' , {name : name , email : email, password : password});
+    
     }   
     
     
@@ -54,15 +54,38 @@ app.post("/signup" , async (req,res)=> {
    
 })
 
+app.get("/forgotpassword" , (req,res) => {
+    res.render('forgotpassword');
+})
+app.post("/changepassword", async (req, res) => {
+    
+    const useremail = req.body.useremail;
+    const newpassword = req.body.newpassword;
+    const userFound = await userModel.findOne({ email: useremail });
+  
+    if (userFound) {
+      userFound.password = newpassword;
+  
+      try {
+        await userFound.save();
+        res.send("Password changed successfully, please login again <br> <a href='/'>Login</a>");
+      } catch (err) {
+        console.log("Error occurred while changing the password:", err);
+        res.send("There was a problem changing the password , please try again ! <br> <a href='/forgotpassword'>Go Back</a>");
+      }
+    }
+  });
+  
+
 app.post("/signin" , async (req, res)=> {
+    console.log("ent signin");
    const email = req.body.email;
    const password = req.body.password;
-   console.log("ent password: " , password);
+   
    const userFound = await userModel.findOne({email : email});
 //    console.log(userFound);
    if(userFound) {
-       console.log("yee logg" , userFound);
-       console.log("dusri : " , (userFound.email === email ), (userFound.password === password));
+      
     if(userFound.email === email && userFound.password === password) {
         res.render('dashboard' , { name : userFound.name , email : email})
     } else {
@@ -73,7 +96,7 @@ app.post("/signin" , async (req, res)=> {
    }
 })
 
-app.listen(3001);
+app.listen(3000);
 
 // mongo db connections
 
