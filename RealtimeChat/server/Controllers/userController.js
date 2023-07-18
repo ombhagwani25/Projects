@@ -69,5 +69,14 @@ const findUser = async (req,res) => {
     }
 }
 
+const getUsers = async (req,res) => {
+    try {
+        const users = await userModel .find();
+        res.status(200).json(users);
+    } catch (error) {
+        console.log(error);
+    }
+}
 
-module.exports = {registerUser, loginUser,  findUser};
+
+module.exports = {registerUser, loginUser,  findUser , getUsers};
