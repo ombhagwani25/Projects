@@ -21,7 +21,8 @@ app.use(express.static("public"));
 
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://127.0.0.1:27017/test');
+//! db name was "test" previously in working condition
+mongoose.connect('mongodb+srv://reoocodes:reoo@cluster0.tvwhmlx.mongodb.net/todolist');
 const itemSchema = new mongoose.Schema({
   name: String
 });
