@@ -19,7 +19,13 @@ export const AuthContextProvider = ({ children }) => {
   } , [])
 
   const registerUser  = useCallback(async()=> {
+
+    setIsRegisterLoading(true)
+    setRegisterError(null)
+
     const response = await postRequest(`${baseUrl}/users/register`, JSON.stringify(registerInfo))
+
+    setIsRegisterLoading(false)
 
     if(response.error) {
       return setRegisterError(response)
@@ -29,7 +35,7 @@ export const AuthContextProvider = ({ children }) => {
   } , [])
 
   return (
-    <AuthContext.Provider value={{ user , registerInfo,  updateRegisterInfo }}>
+    <AuthContext.Provider value={{ user , registerInfo,  updateRegisterInfo ,registerUser, registerError }}>
       {children}
     </AuthContext.Provider>
   );

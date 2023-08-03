@@ -5,12 +5,11 @@ import { AuthContext } from '../context/AuthContext'
 
 export default function Register() {
 
-  const { registerInfo, updateRegisterInfo } = useContext(AuthContext)
-
+  const { registerInfo, updateRegisterInfo, registerUser , registerError } = useContext(AuthContext)
 
   return (
     <>
-      <Form>
+      <Form onSubmit={registerUser}>
         <Row style={{
           height: '100vh',
           justifyContent: 'center',
