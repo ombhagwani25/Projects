@@ -5,7 +5,8 @@ import { AuthContext } from '../context/AuthContext'
 
 export default function Register() {
 
-  const { user } = useContext(AuthContext)
+  const { registerInfo, updateRegisterInfo } = useContext(AuthContext)
+
   return (
     <>
       <Form>
@@ -18,11 +19,17 @@ export default function Register() {
           <Col xs={6}>
             <Stack gap={3}>
               <h2>Register</h2>
-              <h2>{user.name}</h2>
+             
 
-              <Form.Control type='text' placeholder='Name' />
-              <Form.Control type='email' placeholder='Email' />
-              <Form.Control type='password' placeholder='Password' />
+              <Form.Control type='text' placeholder='Name' onChange={(event)=> {updateRegisterInfo({
+                ...registerInfo , name : event.target.value
+              })}} />
+              <Form.Control type='email' placeholder='Email' onChange={(event)=> {updateRegisterInfo({
+                ...registerInfo , email : event.target.value
+              })}} />
+              <Form.Control type='password' placeholder='Password' onChange={(event)=> {updateRegisterInfo({
+                ...registerInfo , password : event.target.value
+              })}} />
               <Button variant='info' type='submit'>
                 Register
               </Button>
