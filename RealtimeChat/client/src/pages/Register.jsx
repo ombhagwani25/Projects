@@ -7,6 +7,7 @@ export default function Register() {
 
   const { registerInfo, updateRegisterInfo } = useContext(AuthContext)
 
+
   return (
     <>
       <Form>
