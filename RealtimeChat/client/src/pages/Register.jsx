@@ -5,7 +5,7 @@ import { AuthContext } from '../context/AuthContext'
 
 export default function Register() {
 
-  const { registerInfo, updateRegisterInfo, registerUser , registerError } = useContext(AuthContext)
+  const { registerInfo, updateRegisterInfo, registerUser , registerError , isRegisterLoading } = useContext(AuthContext)
 
   return (
     <>
@@ -31,9 +31,12 @@ export default function Register() {
                 ...registerInfo , password : event.target.value
               })}} />
               <Button variant='info' type='submit'>
-                Register
+                {isRegisterLoading ? "Creating your account" : "Register"}
               </Button>
-              <Alert variant='danger'><p>An error had occurred</p></Alert>
+              {
+                registerError?.error &&  <Alert variant='danger'><p>{registerError?.message}</p></Alert>
+              }
+             
             </Stack>
           </Col>
 

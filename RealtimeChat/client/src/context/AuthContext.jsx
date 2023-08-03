@@ -1,4 +1,5 @@
 import { createContext, useCallback, useState } from "react";
+import { postRequest , baseUrl } from "../utils/services";
 
 export const AuthContext = createContext();
 
@@ -13,17 +14,19 @@ export const AuthContextProvider = ({ children }) => {
       password :""
     }
   )
-  console.log("register info :" , registerInfo);
+  // console.log("register info :" , registerInfo);
   const updateRegisterInfo = useCallback((info) => {
     setRegisterInfo(info);
   } , [])
 
-  const registerUser  = useCallback(async()=> {
+  const registerUser  = useCallback(async(event)=> {
 
+    event.preventDefault();
     setIsRegisterLoading(true)
     setRegisterError(null)
 
     const response = await postRequest(`${baseUrl}/users/register`, JSON.stringify(registerInfo))
+    
 
     setIsRegisterLoading(false)
 
@@ -32,10 +35,10 @@ export const AuthContextProvider = ({ children }) => {
     }
     localStorage.setItem("User", JSON.stringify(response))
     setUser(response)
-  } , [])
+  } , [registerInfo])
 
   return (
-    <AuthContext.Provider value={{ user , registerInfo,  updateRegisterInfo ,registerUser, registerError }}>
+    <AuthContext.Provider value={{ user , registerInfo,  updateRegisterInfo ,registerUser, registerError , isRegisterLoading }}>
       {children}
     </AuthContext.Provider>
   );
