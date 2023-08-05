@@ -19,7 +19,7 @@ const registerUser = async (req, res) => {
 
     if(!name || !email || !password) return res.status(400).json("Please enter all fields");
 
-    if(validator.isEmail(email)) return res.status(400).json("Please enter a valid email");
+    // if(validator.isEmail(email)) return res.status(400).json("Please enter a valid email");
 
     if(validator.isStrongPassword(password)) return res.status(400).json("Please enter a strong password");
 

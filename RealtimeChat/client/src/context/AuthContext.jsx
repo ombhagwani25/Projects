@@ -1,4 +1,4 @@
-import { createContext, useCallback, useState } from "react";
+import { createContext, useCallback, useEffect, useState } from "react";
 import { postRequest , baseUrl } from "../utils/services";
 
 export const AuthContext = createContext();
@@ -7,6 +7,7 @@ export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [registerError, setRegisterError] = useState(null)
   const [isRegisterLoading, setIsRegisterLoading] = useState(false)
+
   const [registerInfo, setRegisterInfo] = useState(
     {
       name : "",
@@ -14,16 +15,23 @@ export const AuthContextProvider = ({ children }) => {
       password :""
     }
   )
-  // console.log("register info :" , registerInfo);
+
+  useEffect(()=> {
+    const user = localStorage.getItem("User")
+    setUser(JSON.parse(user));
+  } , [])
+
   const updateRegisterInfo = useCallback((info) => {
     setRegisterInfo(info);
   } , [])
 
+  console.log("userr : " , user);
   const registerUser  = useCallback(async(event)=> {
 
     event.preventDefault();
     setIsRegisterLoading(true)
     setRegisterError(null)
+    
 
     const response = await postRequest(`${baseUrl}/users/register`, JSON.stringify(registerInfo))
     
