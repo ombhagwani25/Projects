@@ -1,10 +1,10 @@
 import React, { useContext } from 'react'
 import { Container, Nav, Navbar, Stack } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import { AuthContext } from '../context/AuthContext'
+import { AuthContext  } from '../context/AuthContext'
 export default function NavBar() {
 
-    const {user} = useContext(AuthContext);
+    const {user , logoutUser} = useContext(AuthContext);
 
     return (
         <Navbar bg='dark' className='mb-4' style={{ height: "3.75rem" }} >
@@ -16,6 +16,9 @@ export default function NavBar() {
                     <Link to="/login" className='link-light text-decoration-none'>Login</Link>
 
                     <Link to="/register" className='link-light text-decoration-none'>Register</Link>
+
+
+                    <Link onClick={logoutUser} className='link-light text-decoration-none'>Logout</Link>
 
                     </Stack>
                 </Nav>
