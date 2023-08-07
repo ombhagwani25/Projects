@@ -13,12 +13,23 @@ export default function NavBar() {
                 <span className='text-warning'>{user ?  `Logged in as ${user.name}` :"Login"}</span>
                 <Nav>
                     <Stack direction="horizontal" gap={3}>
-                    <Link to="/login" className='link-light text-decoration-none'>Login</Link>
+                        {/* if we have a user , display this  */}
+                        {
+                            user && (<>
+                            <Link onClick={logoutUser} className='link-light text-decoration-none'>Logout</Link>
+                            
+                            </>)
+                        }
+                        {/* if we dont have user , display this */}
+                        {
+                            !user && (<>
+                            <Link to="/login" className='link-light text-decoration-none'>Login</Link>
+                        <Link to="/register" className='link-light text-decoration-none'>Register</Link>
+                            </>)
+                        }
 
-                    <Link to="/register" className='link-light text-decoration-none'>Register</Link>
 
 
-                    <Link onClick={logoutUser} className='link-light text-decoration-none'>Logout</Link>
 
                     </Stack>
                 </Nav>
