@@ -6,22 +6,22 @@ export default function Navbar() {
   return (
    <>
     <nav>
-        <div class="logo">
+        <div className="logo">
             <img src="logo.svg" alt="Logo Image" />
         </div>
-        <div class="hamburger">
-            <div class="line1"></div>
-            <div class="line2"></div>
-            <div class="line3"></div>
+        <div className="hamburger">
+            <div className="line1"></div>
+            <div className="line2"></div>
+            <div className="line3"></div>
         </div>
-        <ul class="nav-links">
+        <ul className="nav-links">
             <li><a href="/">Home</a></li>
             <li><a href="/">Solutions</a></li>
             <li><a href="/">Products</a></li>
             <li><a href="/">Services</a></li>
             <li><a href="/">Contact Us</a></li>
-            <li><button class="login-button" href="/">Login</button></li>
-            <li><button class="join-button" href="/">Join</button></li>
+            <li><button className="login-button" href="/">Login</button></li>
+            <li><button className="join-button" href="/">Join</button></li>
         </ul>
     </nav>
     

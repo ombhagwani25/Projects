@@ -14,7 +14,7 @@ export default function NewsItem(props) {
 
 
                     <p className="card-text"> {props.description == null ?  " " : (props.description.length > 30 ? props.description.substring(0,30) + "..." : props.title)  }  </p>
-                    <a href="/" className="btn btn-sm btn-primary">Read More</a>
+                    <a href={props.url} className="btn btn-sm btn-primary">Read More</a>
                 </div>
 
             </div>
