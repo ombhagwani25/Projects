@@ -1,13 +1,13 @@
 import React from 'react'
 import navbarcss from '../style/navbar.css' 
-import  navbarjs from "../script/navbar.js"
+
 
 export default function Navbar() {
   return (
    <>
     <nav>
         <div className="logo">
-            <img src="logo.svg" alt="Logo Image" />
+            <img src="reoonews.png" alt="Logo Image" />
         </div>
         <div className="hamburger">
             <div className="line1"></div>
