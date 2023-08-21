@@ -8,7 +8,7 @@ export default function Login() {
   const {loginUser , loginError, loginInfo , updateLoginInfo, isLoginLoading } = useContext(AuthContext);
   return (
    <>
-  <Form>
+  <Form onSubmit={loginUser}>
       <Row style={{
         height: '100vh',
         justifyContent: 'center',
@@ -19,11 +19,11 @@ export default function Login() {
         <Stack gap={3}> 
         <h2>Login</h2>
         <Form.Control type='email' placeholder='Email' onChange={(e)=> {updateLoginInfo({...loginInfo , email : e.target.value})}} />
-        <Form.Control type='password' placeholder='Password'  />
+        <Form.Control type='password' placeholder='Password' onChange={(e)=> {updateLoginInfo({...loginInfo , password : e.target.value})}}  />
         <Button variant='info' type='submit'>
-          Register
+          {isLoginLoading ? "Signing in..." : "Login"}
         </Button>
-          <Alert variant='danger'><p>An error had occurred</p></Alert>
+          {loginError?.error && <Alert variant='danger'><p>{loginError?.message}</p></Alert>}
         </Stack>
         </Col>
 

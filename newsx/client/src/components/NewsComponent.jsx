@@ -7,7 +7,8 @@ import DemoData from "./DemoData.json";
 export default function NewsComponent() {
 
     const articles = DemoData.articles;
-    const url = "https://newsapi.org/v2/top-headlines?country=us&apiKey=398674dffbd849df94e0e54785d51b7f";
+    const pageSize = 10; // Set the desired number of articles to fetch
+    const url = `https://newsapi.org/v2/top-headlines?country=us&pageSize=${pageSize}&apiKey=398674dffbd849df94e0e54785d51b7f`;
     const fetchFunc = () => {
         return fetch(url)
             .then((res) => res.json())
@@ -33,7 +34,7 @@ export default function NewsComponent() {
                         return (
 
                             <div className="col col-md4" key={index}>
-                                <NewsItem title={item.title} description={item.description} imageUrl={item.urlToImage} url={item.url} />
+                                <NewsItem title={item.title} description={item.description} imageUrl={item.urlToImage} url={(item.url) == null ? "https://img.freepik.com/premium-vector/default-image-icon-vector-missing-picture-page-website-design-mobile-app-no-photo-available_87543-7509.jpg": item.url} />
                             </div>
                         );
                     })}
