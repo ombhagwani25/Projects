@@ -3,6 +3,8 @@ const cors = require("cors");
 const app = express();
 const mongoose = require("mongoose");
 const userRoute = require("./Routes/userRoute");
+const chatRoute = require("./Routes/chatRoute");
+const messageRoute = require("./Routes/messageRoute");
 const jwt = require("jsonwebtoken");
 const validator = require("validator");
 const bcrypt = require("bcrypt");
@@ -23,6 +25,8 @@ const uri = process.env.ATLAS_URI;
 app.get("/", (req, res) => {
   res.send("Home page.");
 })
+
+app.use("/api/chats", chatRoute)
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

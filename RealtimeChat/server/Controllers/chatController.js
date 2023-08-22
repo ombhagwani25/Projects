@@ -27,16 +27,37 @@ const createChat = async (req,res)=> {
 }
 
 
-const findUserChats = aync (req, res)=> {
+const findUserChats = async (req, res)=> {
     const userId = req.params.userId;
 
     try {
         const chats = await chatModel.find({
-            members:
+            members: {$in : [userId]}
         })
+
+        res.status(200).json(chats)
 
     } catch(error) {
         console.log(error);
         res.status(500).json(error)
     }
 }
+
+
+const findChats = async (req, res)=> {
+   const {user1Id , user2Id} = req.params.userId
+
+    try {
+        const chats = await chatModel.find({
+            members : {$all: [user1Id, user2Id]}
+        })
+
+        res.status(200).json(chat)
+
+    } catch(error) {
+        console.log(error);
+        res.status(500).json(error)
+    }
+}
+
+module.exports = {createChat , findUserChats, findChats}
