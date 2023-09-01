@@ -1,45 +1,43 @@
-const express = require("express");
-const cors = require("cors");
-const app = express();
-const mongoose = require("mongoose");
-const userRoute = require("./Routes/userRoute");
-const chatRoute = require("./Routes/chatRoute");
-const messageRoute = require("./Routes/messageRoute");
-const jwt = require("jsonwebtoken");
-const validator = require("validator");
-const bcrypt = require("bcrypt");
-
-
-
-
 require("dotenv").config();
 
+const express = require("express");
+const cors = require("cors");
+const axios = require("axios");
+
+const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(cors({ origin: true }));
 
-app.use("/api/users", userRoute);
-
-const port = process.env.PORT || 5000;
-const uri = process.env.ATLAS_URI;
-
-app.get("/", (req, res) => {
-  res.send("Home page.");
-})
-
-app.use("/api/chats", chatRoute)
-app.use("/api/messages", messageRoute)
-
-
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+app.post("/signup", async (req, res) => {
+  const { username, secret, email, first_name, last_name } = req.body;
+  try {
+    const r = await axios.post(
+      "https://api.chatengine.io/users/",
+      { username, secret, email, first_name, last_name },
+      { headers: { "Private-Key": process.env.CHAT_ENGINE_PRIVATE_KEY } }
+    );
+    return res.status(r.status).json(r.data);
+  } catch (e) {
+    return res.status(e.response.status).json(e.response.data);
+  }
 });
-console.log('URI:', uri);
 
-mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => {
-    console.log("Connected to the database!");
-  })
-  .catch((error) => {
-    console.log("Connection failed!");
-    console.log(error);
-  });
+app.post("/login", async (req, res) => {
+  const { username, secret } = req.body;
+  try {
+    const r = await axios.get("https://api.chatengine.io/users/me/", {
+      headers: {
+        "Project-ID": process.env.CHAT_ENGINE_PROJECT_ID,
+        "User-Name": username,
+        "User-Secret": secret,
+      },
+    });
+    return res.status(r.status).json(r.data);
+  } catch (e) {
+    return res.status(e.response.status).json(e.response.data);
+  }
+});
+
+// Docs at rest.chatengine.io
+// vvv On port 3001!
+app.listen(3001);
